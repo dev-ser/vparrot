@@ -1,0 +1,16 @@
+{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+<form method="post" action="{{ path('app_voitures_delete', {'id': voiture.id}) }}"
+      onsubmit="return confirmerSuppression();">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voiture.id) }}">
+    <button class="btn btn-danger">Supprimer</button>
+</form>
+
+<script>
+    function confirmerSuppression() {
+        if (window.confirm('Êtes-vous sûr de vouloir supprimer?')) {
+            return window.confirm('Confirmez la suppression définitive.');
+        }
+        return false;
+    }
+</script>
+{% endif %}

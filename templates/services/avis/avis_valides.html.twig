@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis Validés{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_USER') %}
+        <div class="container mt-5">
+            <h2 class="mb-4">Avis Validés</h2>
+
+            {% if listeAvisValides is not empty %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Message</th>
+                            <th>Étoiles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for avis in listeAvisValides %}
+                            <tr>
+                                <td>{{ avis.nom }}</td>
+                                <td>{{ avis.prenom }}</td>
+                                <td>{{ avis.commentaire }}</td>
+                                <td>
+                                    <div class="d-flex me-2">
+                                        {% for i in 1..5 %}
+                                            {% if i <= avis.note %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('app_avis_liste') }}" class="btn btn-primary">Retour</a>
+            {% else %}
+                <p>Aucun avis validé disponible pour le moment.</p>
+                <a href="{{ path('app_avis_liste') }}" class="btn btn-primary">Retour</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

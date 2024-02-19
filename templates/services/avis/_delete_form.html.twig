@@ -1,0 +1,18 @@
+<form method="post" action="{{ path('app_avis_delete', {'id': avis.id}) }}"
+onsubmit="confirmer le retour('Etes-vous sur de vouloir supprimer?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avis.id) }}">
+	{# <button class="btn">Supprimer</button> #}
+	{# <button type="submit" class="btn btn-danger">Supprimer</button> #}
+    <button onclick="return confirmerSuppression()" class="btn btn-danger"> Supprimer</button>
+</form>
+
+<script>
+	function confirmerSuppression() { // Affiche une alerte de confirmation
+if (window.confirm('Êtes-vous sûr de vouloir supprimer?')) { // Si l'utilisateur confirme la suppression, affiche une autre alerte de confirmation
+return window.confirm('Confirmez la suppression définitive.');
+}
+
+// Si l'utilisateur annule la première confirmation, empêche la soumission du formulaire
+return false;
+}
+</script>

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Horaires{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-3 col-md-6 mb-2 mt-5">
+        <h5 class="text mb-4">Horaires</h5>
+        <table class="table table-dark text-white">
+            <thead>
+                <tr>
+                    <th scope="col" class="fs-6">Jours</th>
+                    <th scope="col" class="fs-6">Début_m</th>
+                    <th scope="col" class="fs-6">Fin_m</th>
+                    <th scope="col" class="fs-6">Début_am</th>
+                    <th scope="col" class="fs-6">Fin_am</th>
+                    {% if is_granted('ROLE_USER') %}
+                        <th scope="col">Actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% if horaires is defined %}
+                    {% for horaire in horaires %}
+                        <tr>
+                            <td class="fs-6">{{ horaire.jour|e }}</td>
+                            <td class="fs-6">{{ horaire.debutMatin ? horaire.debutMatin|date('H:i')|e : 'Fermé' }}</td>
+                            <td class="fs-6">{{ horaire.finMatin ? horaire.finMatin|date('H:i')|e : 'Fermé' }}</td>
+                            <td class="fs-6">{{ horaire.debutApresMidi ? horaire.debutApresMidi|date('H:i')|e : 'Fermé' }}</td>
+                            <td class="fs-6">{{ horaire.finApresMidi ? horaire.finApresMidi|date('H:i')|e : 'Fermé' }}</td>
+                            {% if is_granted('ROLE_USER') %}
+                                <td>
+                                    <div class="d-flex me-2">
+                                        <a href="{{ path('app_horaires_show', {'id': horaire.id}) }}" class="btn btn-primary me-2"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ path('app_horaires_edit', {'id': horaire.id}) }}" class="btn btn-warning me-2"><i class="far fa-pen-to-square"></i></a>
+                                        <a href="{{ path('app_horaires_delete', {'id': horaire.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

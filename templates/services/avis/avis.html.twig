@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_USER') %}
+        <div class="container mt-5">
+            <h2 class="mb-4">Avis des clients</h2>
+
+            {% if listeAvis is not empty %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Message</th>
+                            <th>Étoiles</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for avis in listeAvis %}
+                            <tr>
+                                <td>{{ avis.nom }}</td>
+                                <td>{{ avis.prenom }}</td>
+                                <td>{{ avis.commentaire }}</td>
+                                <td>
+                                    <div class="d-flex me-2">
+                                        {% for i in 1..5 %}
+                                            {% if i <= avis.note %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if avis.valide %}
+                                        <span class="text-success">Validé</span>
+                                    {% else %}
+                                        <span class="text-warning" id="enAttente{{ avis.id }}">En attente de validation</span>
+                                        {% if is_granted('ROLE_USER') %}
+                                            <a href="" class="btn btn-{{ avis.valide ? 'success' : 'danger' }} ms-2 btn-valider"
+                                               data-avis-id="{{ avis.id }}" data-avis-valide="1">
+                                                <i class="fas fa-check"></i> Valider
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="d-flex me-2 ">
+                                        <a href="{{ path('app_avis_edit', {'id': avis.id}) }}" class="btn btn-warning me-2">
+                                            <i class="far fa-pen-to-square"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('app_employes') }}" class="btn btn-primary">Retour</a>
+            {% else %}
+                <p>Aucun avis disponible pour le moment.</p>
+                <a href="{{ path('app_avis') }}" class="btn btn-primary">Retour</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="container mt-5">
+            {# <p>Accès non autorisé. Veuillez vous connecter en tant qu'utilisateur.</p> #}
+             <a href="{{ path('access_denied') }}" class="btn btn-primary">Retour</a>
+        </div>
+    {% endif %}
+{% endblock %}

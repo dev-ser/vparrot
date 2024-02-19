@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Accueil admin{% endblock %}
+{% block metaDescription %}<meta name="description" content="Vous êtes sur la page d'accueil d'un administrateur. Vous avez accès à toute la gestion des données de cette application. Vous allez pouvoir créer, modifier et supprimer tout ce que vous souhaitez. C'est à partir de là que vous pourrez créer un nouvel utilisateur.">{% endblock %}
+{% block body %}
+<body>
+  
+{% include "admin/_header.html.twig" %}
+{% block main %}
+<main class="container">
+<div class="container px-4 py-5  bg-opacity-50 rounded" id="hanging-icons" >
+    <h2 class="pb-2 border-bottom">Bienvenue sur la page de gestion du site</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="col d-flex align-items-start">
+        <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+          <i class="bi bi-building-fill-add bg-white" style="color: black;"></i>
+        </div>
+        </div>
+       </div>
+
+
+        <div class="row">
+  <div class="col-sm-4 mb-3 mb-sm-0"> 
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Nouvel utilisateur</h5>
+        <p class="card-text">Vous pouvez créer un nouvel utilisateur en cliquant sur le bouton ci-dessous.</p>
+        <a href="{{ path('app_user_new') }}" class="btn btn-danger">Créez utilisateur</a>
+          <a href="{{ path('app_user_index') }}" class="btn btn-danger">Voir les utilisateurs</a>
+      </div>
+    </div>
+  </div>
+
+   <div class="col-sm-4 mb-3 mb-sm-0"> 
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Ajouter Voitures</h5>
+        <p class="card-text">Vous pouvez ajouter et modifier les vehicules d'occasions en cliquant sur le bouton ci-dessous.</p>
+      <a href="{{ path('app_voitures_new') }}" class="btn btn-danger">Créer véhicules</a>
+      <a href="{{ path('app_voitures_index') }}" class="btn btn-danger">Voir les véhicules</a>
+      </div>
+    </div>
+  </div> 
+
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Créer Horaires</h5>
+        <p class="card-text">Vous pouvez créer les horaires en cliquant sur le bouton ci-dessous.</p>
+        <a href="{{ path('app_horaires_new') }}" class="btn btn-danger">Créer horaires</a>
+         <a href="{{ path('app_admin') }}" class="btn btn-danger">Voir les horaires</a>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</main>
+ </div>
+ 
+{% endblock %}
+{% include "admin/_footer.html.twig" %}
+</body>
+{% endblock %}

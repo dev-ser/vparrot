@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block body %}
+    <h1>Résultats de la recherche</h1>
+
+    <div class="container">
+        <div class="row">
+            {% for voiture in results %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ asset('assets/img/car/' ~ voiture.image) }}" class="card-img-top" alt="{{ voiture.marque }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ voiture.marque }}</h5>
+                            <p class="card-text">
+                                Année : {{ voiture.annee }} |
+                                Kilométrage : {{ voiture.km }} km |
+                                Énergie : {{ voiture.energie }}
+                            </p>
+                            <p class="card-text">{{ voiture.prix }} €</p>
+                            <a href="{{ path('app_voitures_show', {'id': voiture.id}) }}" class="btn btn-primary">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if results is empty %}
+        <p>Aucun résultat trouvé pour les critères de recherche sélectionnés.</p>
+    {% endif %}
+{% endblock %}

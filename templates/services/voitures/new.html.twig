@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}Nouvelle Voiture
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<h2>Créer une Voiture</h2>
+				<div class="mb-3"></div>
+				<form method="post">
+					{{ include('services/voitures/_form.html.twig') }}
+					<div class="text-center mt-3">
+					{# <button type="submit" class="btn btn-primary">Enregistrer</button> #}
+						{# <a href="{{ path('app_voitures_index') }}" class="btn btn-secondary">Retour à la liste</a> #}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	 {# {% endif %} #}
+{% endblock %}

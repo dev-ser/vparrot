@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier Voitures
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<h1>Modifier Voitures</h1>
+				<div class="mb-3"></div>
+				{{ include('services/voitures/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+				{{ include('services/voitures/_delete_form.html.twig') }}
+			{% endblock %}

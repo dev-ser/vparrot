@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Horaires{% endblock %}
+
+{% block body %}
+
+      {# <footer class="row row-cols-5 py-5 my-5 bg-dark text-light border-top"> #}
+      {# <footer class="row row-cols-1 row-cols-md-5 py-5 my-5 bg-dark text-light border-top"> #}
+     <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 mt-5 bg-dark text-light">
+  
+  <!-- Contenu de la section Adresse -->
+ 
+ <div class="col"> 
+     <h5 class="col mb-4 ms-4 mt-5">Adresse</h5>
+    <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+            <i class="fa fa-map-marker-alt me-3 ms-4"></i>
+            <span class="text-muted">6 allée de jardin</span>
+        </li>
+        <li class="nav-item mb-2">
+            <i class="fa fa-map-marker-alt me-3 ms-4"></i>
+            <span class="text-muted">31100 TOULOUSE</span>
+        </li>
+        <li class="nav-item mb-2">
+            <i class="fa fa-phone-alt me-3 ms-4"></i>
+            <span class="text-muted">01 42 10 59 00</span>
+        </li>
+        <li class="nav-item mb-2">
+            <i class="fa fa-envelope me-3 ms-4"></i>
+            <span class="text-muted">info@garage.com</span>
+        </li>
+    </ul>
+    <div class="d-flex pt-2 ms-md-4">
+        <a class="btn btn-outline-danger btn-social" href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+        <a class="btn btn-outline-danger btn-social" href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+        <a class="btn btn-outline-danger btn-social" href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+        <a class="btn btn-outline-danger btn-social" href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</div>
+
+  <!-- Contenu de la section Services -->
+    <div class="col mt-5">
+       <h5 class="col mb-4">Services</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="{{ path('app_voitures_index')}}" class="btn btn-danger">Carrosserie</a></li>
+        <li class="nav-item mb-2"><a href="{{ path('app_home')}}" class="btn btn-danger">Mécanique</a></li>
+        <li class="nav-item mb-2"><a href="{{ path('app_home')}}" class="btn btn-danger">Entretien</a></li>
+        <li class="nav-item mb-2"><a href="{{ path('app_voitures_index')}}" class="btn btn-danger">Voitures d'occasions</a></li>
+      </ul>
+    </div>
+
+  <!-- Contenu de la section Voitures -->
+   <div class="col me-md-5">
+        <h5 class="col mb-4 mt-5">Voitures d'occasions</h5>
+        <ul class="nav flex-column">
+            <div class="row row-cols-2 g-2">
+        <li class="nav-item mb-2">
+         <a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/1-peugeot-308.webp') }}" class="img-fluid" alt="Voiture 1">
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/2-mercedes-classe-e-all-terrain-2023.jpg') }}" class="img-fluid" alt="Voiture 2">
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/3-bmw-x5-protection-vr6.webp') }}" class="img-fluid" alt="Voiture 2">
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/4-audi-r8-by-vf-engineering2.jpg') }}" class="img-fluid" alt="Voiture 2">
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/5-2023-toyota-gr86-uk-spec.webp') }}" class="img-fluid" alt="Voiture 2">
+          </a>
+        </li>
+        <li class="nav-item mb-2"><a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/6-yeni-ds-7-turkiye-de.webp') }}" class="img-fluid" alt="Voiture 2">
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/5-2023-toyota-gr86-uk-spec-4.jpg') }}" class="img-fluid" alt="Voiture 2">
+         </a>
+        </li>
+        <li class="nav-item mb-2">
+        <a href="{{ path('app_voitures_index') }}">
+        <img src="{{ asset('assets/img/car/6-yeni-ds-7-turkiye-de-4.jpg') }}" class="img-fluid" alt="Voiture 2">
+        </a>
+      </ul>
+    </div> 
+      </div> 
+      
+  {# Include the Horaires section #}
+    {% include "services/horaires/index.html.twig" %}
+     <hr class="w-100 border-light my-4">
+            <!-- Copyright -->
+<div class="col-md-12 text-center">
+   <p class="fs-5" style="font-size: 3px;">&copy;2024 Serap DEV | <a class="border-bottom fs-3" href=""></a>Copyright All Right Reserved.</p>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer End -->
+{% endblock %}

@@ -1,0 +1,44 @@
+{# templates/contact/messages.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages des Clients{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h2 class="pb-2 border-bottom">Messages des Clients</h2>
+        
+        {% if messages is not empty %}
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Action</th> {# Ajout de la colonne "Action" #}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in messages %}
+                        <tr>
+                            <td>{{ message.nom }}</td>
+                            <td>{{ message.prenom }}</td>
+                            <td>{{ message.email }}</td>
+                            <td>{{ message.telephone }}</td>
+                            <td>{{ message.message }}</td>
+                            <td>
+                                {# <a href="{{ path('app_employes') }}" class="btn btn-primary">Retour</a> #}
+                                <a href="{{ path('app_contact_delete', {'id': message.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucun message pour le moment.</p>
+        {% endif %}
+         <a href="{{ path('app_employes') }}" class="btn btn-primary">Retour</a>
+    </div>
+{% endblock %}

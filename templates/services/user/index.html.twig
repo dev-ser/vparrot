@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des utilisateurs{% endblock %}
+{% block body %}
+
+{% include 'admin/_header.html.twig' %}
+
+<section class="container-fluid">
+    <div class="container px-4 py-4 bg-opacity-50 rounded" id="hanging-icons">
+        <h2 class="pb-2 border-bottom">Nos utilisateurs</h2>
+    </div>
+</section>
+
+<main>
+    <div class="card-group">
+        <div class="container-fluid">
+            <div class="row">
+                {% for user in users %}
+                    <div class="col-sm-4 mb-4 mb-sm-0">
+                        <div class="card mb-4 me-1">
+                            <img src="{{ asset('assets/img/utilisateurs/' ~ user.image()) }}" class="card-img-top" alt="{{ user.image }}">
+                            <div class="card-body">
+                                <h5 class="card-title">Nom : {{ user.nom|e }}</h5>
+                                <h5 class="card-title">Prénom : {{ user.prenom|e }}</h5>
+                                <p class="card-text">Email : {{ user.email|e }}</p>
+                                <p class="card-text">Rôle : {{ user.roles[0]|e }}</p>
+                                <hr>
+                                <p class="card-text">Mot de passe : {{ user.password|slice(0, 5)|replace({(user.password|slice(0, 5)): '*****'})|e }}</p>
+                                <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-danger">Détails</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+</main>
+{% include 'admin/_footer.html.twig' %}
+{% endblock %}

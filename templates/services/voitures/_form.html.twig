@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div class="col-auto mx-1">
+<button class="btn btn-primary mb-3">{{ button_label|default('Enregistrer') }}</button>
+<a href="{{ path('app_voitures_index') }}" class="btn btn-secondary mb-3">Retour à la liste</a>
+</div>
+{{ form_end(form) }}

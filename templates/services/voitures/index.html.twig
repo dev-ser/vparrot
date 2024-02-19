@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des voitures{% endblock %}
+
+{% block body %}
+    {# {% if is_granted('ROLE_ADMIN') %}
+        {% include "admin/_header.html.twig" %}
+    {% elseif is_granted('ROLE_USER') %}
+        {% include "users/_header.html.twig" %}
+    {% else %}
+        Aucun des rôles n'est présent, peut-être un utilisateur non authentifié 
+    {% endif %} #}
+    
+    {% block main %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <!-- Si l'utilisateur est connecté, incluez la navbar correspondant à son rôle -->
+            {% if is_granted('ROLE_ADMIN') %}
+                {% include "admin/_header.html.twig" %}
+            {% elseif is_granted('ROLE_USER') %}
+                {% include "employes/_header.html.twig" %}
+            {% endif %}
+        {% else %}
+            <!-- Si l'utilisateur n'est pas connecté, incluez une autre navbar -->
+            {% include 'home/_navbar.html.twig' %}
+        {% endif %}
+
+
+	<section class="container-fluid">
+		<div class="container px-4 py-4 bg-opacity-50 rounded" id="hanging-icons">
+			<h2 class="pb-2 border-bottom">Rechercher des voitures</h2>
+		</div>
+	</section>
+
+
+<div class="container mt-4">
+    <form id="searchForm"> 
+    {# <form id="searchForm" onsubmit="return searchCars()"> #}
+        <div class="row">
+            <div class="col-md-2 me-1">
+                <label for="marque">Marque :</label>
+                <select id="marque" name="marque">
+                    <option value="">Choisissez une marque</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Aston">Aston</option>
+                    <option value="Tesla">Tesla</option>
+                    <option value="Peugeot">Peugeot</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Bmw">Bmw</option>
+                    <option value="Audi">Audi</option>
+					 <option value="Toyota">Toyota</option>
+					  <option value="DS7">DS7</option>
+					   <option value="Togg">Togg</option>
+                       <option value="Porche">Porche</option>
+                       <option value="Range Rover">Range Rover</option>
+                       <option value="Bentley">Bentley</option>
+                       <option value="Jaguar">Jaguar</option>
+                       <option value="Maserati">Maserati</option>
+                </select>
+            </div>
+            <div class="col-md-2 me-4">
+                <label for="prix">Prix :</label>
+                <select id="prix" name="prix">
+                    <option value="">Choisissez un prix</option>
+                    <option value="0-10000">Moins de 10 000€</option>
+                    <option value="10000-20000">Entre 10 000€ et 20 000€</option>
+                    <option value="20000-40000">Entre 20 000€ et 40 000€</option>
+					<option value="40000-80000">Entre 40 000€ et 80 000€</option>
+                    <option value="80000-120000">Entre 80 000€ et 120 000€</option>
+                    <option value="120000-150000">Entre 120 000€ et 150 000€</option>
+					<option value="">Plus de 150 000€</option>		
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="energie">Energie :</label>
+                <select id="energie" name="energie">
+                    <option value="">Choisissez une énergie</option>
+                    <option value="Carburant">Carburant</option>
+                    <option value="Essence">Essence</option>
+					 <option value="Electrique">Electrique</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="kilometres">Kilométrage :</label>
+                <select id="kilometres" name="kilometres">
+                    <option value="">Choisissez un kilométrage</option>
+                    <option value="0-15000">Moins de 15 000 km</option>
+                    <option value="15000-30000">Entre 15 000 km et 30 000 km</option>
+                    <option value="30000-60000">Entre 30 000 km et 60 000 km</option>
+					 <option value="60000-180000">Entre 60 000 km et 180 000 km</option>
+					 <option value="180000-200000">Entre 180 000 km et 200 000 km</option>
+                      <option value="">Plus de 200 000 km</option>
+                </select>
+            </div>
+            <div class="col-md-12 mt-3">
+                <button type="button" onclick="searchCars()" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+ {% block javascripts %}
+    <script>
+        function searchCars() {
+            const marque = document.getElementById('marque').value;
+            const prix = document.getElementById('prix').value;
+            const energie = document.getElementById('energie').value;
+            const kilometres = document.getElementById('kilometres').value;
+
+            // On utilise une requête GET pour récupérer les paramètres dans le contrôleur
+            fetch(`/search?marque=${marque}&prix=${prix}&energie=${energie}&kilometres=${kilometres}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('searchResults').innerHTML = data;
+                })
+                .catch(error => console.error('Erreur lors de la recherche : ', error));
+        }
+    </script>
+{% endblock %} 
+
+<!-- Div pour afficher les résultats de la recherche -->
+<div class="container mt-4" id="searchResults">
+    <!-- Les résultats de la recherche seront affichés ici -->
+	</div>	
+
+    	<section class="container-fluid">
+		<div class="container px-4 py-4 bg-opacity-50 rounded" id="hanging-icons">
+			<h2 class="pb-2 border-bottom">Nos véhicules</h2>
+		</div>
+	</section>
+    
+	<main>
+		<div class="card-group">
+			<div class="container-fluid">
+				<div class="row">
+					{% for voiture in voitures %}
+						<div class="col-sm-4 mb-4 mb-sm-0">
+							<div class="card mb-4 me-1">
+								<img src="{{ asset('assets/img/car/' ~ voiture.image) }}" class="card-img-top" alt="{{ voiture.marque }}">
+								{# <img src="{{ asset(images_directory ~ '/' ~ voiture.image) }}" class="card-img-top" alt="{{ voiture.marque }}"> #}
+
+                                <div
+									class="card-body">
+									{# <h5 class="card-title">Id :
+																																																																																																																																																																																																																									{{ voiture.id }}</h5> #}
+									<h5 class="card-title">{{ voiture.marque|e }}</h5>
+									<h5 class="card-title">{{ voiture.model|e }}</h5>
+									<p class="card-text">
+										{{ voiture.annee|e }}  |
+										{{ voiture.km|e }} km 																																																																					|
+										{{ voiture.vitesse|e }} |
+										{{ voiture.energie|e }} 
+									</p>
+									<hr>
+									<p class="card-text">{{ voiture.prix|e }} €</p>
+									 {# <a href="{{ path('details', {'id': voiture.id}) }}" target="_blank" class="btn btn-danger">Détails</a> #}
+									 <a href="{{ path('app_voitures_show', {'id': voiture.id}) }}" class="btn btn-danger">Détails</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+     <!-- Bouton de retour à la liste -->
+<div class="container mt-3">
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin') }}" class="btn btn-secondary">Retour à la liste</a>
+    {% elseif is_granted('ROLE_USER') %}
+        <a href="{{ path('app_employes') }}" class="btn btn-secondary">Retour à la liste</a>
+    {% else %}
+      <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour à la liste</a>
+        {# <p>Erreur : Impossible de déterminer le rôle de l'utilisateur.</p> #}
+    {% endif %}
+      </div>
+         </div>
+         </div>
+		</main>
+
+         {% include 'home/_footer.html.twig' %}
+       
+	{% endblock %}

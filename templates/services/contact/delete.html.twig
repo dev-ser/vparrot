@@ -1,0 +1,16 @@
+<form method="post" action="{{ path('app_contact_delete', {'id': contact.id}) }}"
+onsubmit="confirmer le retour('Etes-vous sur de vouloir supprimer?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contact.id) }}">
+    <button onclick="return confirmerSuppression()" class="btn btn-danger"> Supprimer</button>
+</form>
+
+<script>
+	function confirmerSuppression() { 
+if (window.confirm('Êtes-vous sûr de vouloir supprimer?')) { 
+return window.confirm('Confirmez la suppression définitive.');
+}
+
+// Si l'utilisateur annule la première confirmation, empêche la soumission du formulaire
+return false;
+}
+</script>

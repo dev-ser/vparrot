@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Les horaires
+{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="container px-4 py-4 bg-opacity-50 rounded" id="hanging-icons">
+         <h1>Voici l'horaire</h1>
+            <h2 class="pb-2 border-bottom"></h2>
+            
+        </div>
+    </main>
+
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Jours : <b>{{ horaires.jour }}</b></li>
+                            <li class="list-group-item">Début matin : <b>{{ horaires.debutMatin ? horaires.debutMatin|date('H:i') : '' }}</b></li>
+                            <li class="list-group-item">Fin matin : <b>{{ horaires.finMatin ? horaires.finMatin|date('H:i') : '' }}</b></li>
+                            <li class="list-group-item">Début après-midi : {{ horaires.debutApresMidi ? horaires.debutApresMidi|date('H:i') : '' }}</li>
+                            <li class="list-group-item">Fin après-midi : {{ horaires.finApresMidi ? horaires.finApresMidi|date('H:i') : '' }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-auto">
+                <a href="{{ path('app_horaires_new') }}" class="btn btn-primary">Ajouter</a>
+            </div>
+            <div class="col-auto">
+                <a href="{{ path('app_horaires_edit', {'id': horaires.id}) }}" class="btn btn-success">Modifier</a>
+            </div>
+            <div class="col-auto">
+                {{ include('services/horaires/_delete_form.html.twig') }}
+            </div>
+             <div class="col-auto">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_admin') }}" class="btn btn-secondary">Retour à la liste</a>
+            {% elseif is_granted('ROLE_USER') %}
+                <a href="{{ path('app_employes') }}" class="btn btn-secondary">Retour à la liste</a>
+            {# {% else %}
+                {# Utilisateur non authentifié, rediriger vers la page par défaut #}
+                {# <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour à la liste</a> #}
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-auto">
+                <p class="text-muted">© 2023-2024</p>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -3,3 +3,143 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+    methods: [GET, POST]
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+    methods: [GET, POST]
+
+app_contact:
+    path: /contact
+    controller: App\Controller\ContactController::index
+    methods: [GET, POST]
+
+app_voitures_index:
+    path: /voitures
+    controller: App\Controller\VoituresController::index
+    methods: [GET]
+
+app_voitures_new:
+    path: /voitures/new
+    controller: App\Controller\VoituresController::new
+    methods: [GET, POST]
+
+app_voitures_show:
+    path: /voitures/{id}
+    controller: App\Controller\VoituresController::show
+    methods: [GET]
+
+app_voitures_edit:
+    path: /voitures/{id}/edit
+    controller: App\Controller\VoituresController::edit
+    methods: [GET, POST]
+
+app_voitures_delete:
+    path: /voitures/{id}
+    controller: App\Controller\VoituresController::delete
+    methods: [POST]
+
+app_search_voitures:
+    path: '/search'
+    controller: 'App\Controller\VoituresController::search'
+    methods: ['GET']
+
+app_user_index:
+    path: /user
+    controller: App\Controller\UserController::index
+    methods: [GET]
+
+app_user_new:
+    path: /user/new
+    controller: App\Controller\UserController::new
+    methods: [GET, POST]
+
+app_user_show:
+    path: /user/{id}
+    controller: App\Controller\UserController::show
+    methods: [GET]
+
+app_user_edit:
+    path: /user/{id}/edit
+    controller: App\Controller\UserController::edit
+    methods: [GET, POST]
+
+app_user_delete:
+    path: /user/{id}
+    controller: App\Controller\UserController::delete
+    methods: [POST]
+
+app_horaire_index:
+    path: /horaires
+    controller: App\Controller\HorairesController::index
+    methods: [GET]
+
+app_horaire_new:
+    path: /horaires/new
+    controller: App\Controller\HorairesController::new
+    methods: [GET, POST]
+
+app_horaire_show:
+    path: /horaires/{id}
+    controller: App\Controller\HorairesController::show
+    methods: [GET]
+
+app_horaire_edit:
+    path: /horaires/{id}/edit
+    controller: App\Controller\HorairesController::edit
+    methods: [GET, POST]
+
+app_horaire_delete:
+    path: /horaires/{id}
+    controller: App\Controller\HorairesController::delete
+    methods: [POST]
+
+app_horaires_index:
+    path: /horaires
+    controller: App\Controller\HorairesController::index
+    methods: [GET]
+
+app_avis:
+    path: '/avis'
+    controller: 'App\Controller\AvisController::index'
+    methods: ['GET', 'POST']
+
+app_avis_liste:
+    path: '/avis/liste'
+    controller: 'App\Controller\AvisController::liste'
+    methods: ['GET']
+
+app_avis_valides:
+    path: '/avis/valides'
+    controller: 'App\Controller\AvisController::listeValides'
+    methods: ['GET']
+
+app_avis_edit:
+    path: '/avis/{id}/edit'
+    controller: 'App\Controller\AvisController::edit'
+    methods: [GET, POST]
+
+app_avis_delete:
+    path: /avis/{id}
+    controller: 'App\Controller\AvisController::delete'
+    methods: ['POST']
+  
+access_denied:
+    path: '/access-denied'
+    controller: App\Controller\AccessDeniedController::showAccessDeniedPage    
+
+app_contact_messages:
+    path: /contact/messages
+    controller: App\Controller\ContactController::messages
+    methods: [GET]
+
+app_employes:
+    path: /employes
+    controller: App\Controller\EmployesController::index
+    methods: [GET]
+

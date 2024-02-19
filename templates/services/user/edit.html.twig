@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Les Utilisateurs
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<h1>Modifier Utilisateur</h1>
+				<div class="mb-3"></div>
+				{{ include('services/user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+				{{ include('services/user/_delete_form.html.twig') }}
+			{% endblock %}

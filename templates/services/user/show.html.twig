@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel utilisateur
+{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="container px-4 py-4 bg-opacity-50 rounded" id="hanging-icons">
+            <h2 class="pb-2 border-bottom">{{ user.nom }}</h2>
+        </div>
+    </main>
+
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                            {% if user.image %}
+                                 <img src="{{ asset('assets/img/utilisateurs/' ~ user.image) }}" class="img-fluid d-block mx-auto" style="max-width: 400px; height: auto;" alt="Image">
+                            {% else %}
+                                <p>Aucune image disponible</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-md-6 mx-auto mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Nom : <b>{{ user.nom }}</b></li>
+                            <li class="list-group-item">Prénom : <b>{{ user.prenom }}</b></li>
+                            <li class="list-group-item">Email : {{ user.email }}</li>
+                            <li class="list-group-item">Roles :   {{ user.roles[0] ? user.roles|json_encode : '' }}</li>
+                           <li class="list-group-item">Mot de passe : {{ user.password|slice(0, 5)|replace({(user.password|slice(0, 5)): '*****'}) }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="row justify-content-center align-items-center mt-3">
+                <div class="col-auto mx-1">
+                    <a href="{{ path('app_user_new') }}" class="btn btn-primary">Ajouter</a>
+                </div>
+                <div class="col-auto mx-1">
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-success">Modifier</a>
+                </div>
+                <div class="col-auto mx-1">
+                    {{ include('services/user/_delete_form.html.twig') }}
+                </div>
+                <div class="col-auto mx-1">
+                    <a href="{{ path('app_user_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto d-flex justify-content-center align-items-center">
+            <p class="mt-3 text-muted">© 2023-2024</p>
+        </div>
+    </div>
+	</body>
+{% endblock %}
